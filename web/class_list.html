@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script>
+            function loadlist(callback1,callback2){
+                $.post("ClassList",{
+                }).done(function(list){
+                    $("#list").html(list);
+                    console.log(list);
+                    callback1();
+                    callback2();
+                });
+                
+            }
+            function addclass(){
+                $("#submit").click(function(){
+                    var title = $("#title").val();
+                    var start = $("#start").val();
+                    var end = $("#end").val();
+                    $.post("addclass.jsp",{
+                        title:title,
+                        start:start,
+                        end:end
+                    }).done(function(result){
+                        $("result").html(result);
+                        location.reload();
+                    });        
+                });
+            }
+            function attendance(){
+                $(".checkAttendance").click(function(){
+                   var class_id =  $(this).parent().parent().attr('id');
+                   $.post("Attendance",{
+                      class_id:class_id 
+                   }).done(function(result){
+                       $("#result").html(result);
+                       absence();
+                   });
+                });
+            }
+            function absence(){
+                $(".absence").click(function(){
+                    var student_id = $(this).parent().parent().attr("id");
+                    var tr_id = "#"+student_id;
+                    var class_id = $(tr_id + " > .class_id").attr("id");
+                    $.post("takeAttendance.jsp",{
+                        student_id:student_id,
+                        class_id:class_id
+                    }).done(function(result){
+                        location.reload();
+                    });
+                });        
+            
+               $(".all_absence").click(function(){
+                    
+                    var class_id = this.id;
+                    $.post("takeAttendance.jsp",{
+                        all_student:"all_student",
+                        class_id:class_id
+                    }).done(function(result){
+                        $("#result").html(result);
+                        location.reload();
+                    });
+                });        
+            }
+            $(document).ready(function(){loadlist(addclass,attendance);});
+        </script>
+    </head>
+    <body>
+        <!--table-->
+        <div id="list"></div>
+        <div id="result"></div>
+    </body>
+</html>

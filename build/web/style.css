@@ -1,0 +1,60 @@
+body::-webkit-scrollbar {
+    display: none;
+}
+*{
+   background-color:#98d7f3;
+}
+.pop_up{
+   
+    display:none;
+    height:100%;
+    width:100%;
+    z-index:100000;
+    top:0;
+    position:fixed;
+}
+.frame{
+    border:none;
+}
+.warning{
+    color:#FF0000;
+}
+#main{
+    height:85%;
+    width:100%;
+}
+#meun{
+    height:15%;
+    width:100%;
+    font-size: 25px;
+}
+#logout{
+    display: inline-block;
+}
+#logout input{
+    border:none;
+    font-size:17px;
+}
+#meunfunction{
+    display:inline;
+    text-decoration: none;
+     font-size: 25px;
+}
+#userfunction{
+    display:inline;
+    float:right; 
+    text-decoration: none;
+     font-size: 25px;
+}
+#icon{
+    width:100%;
+    text-align: center;
+
+}
+#contact{
+    width:50%;
+    height:100%;
+}
+#searchmeun{
+    position:fixed;
+}

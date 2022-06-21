@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    </head>
+    <body>
+            <form id="loginForm">
+            username:<input type="text" id="username" size="20">
+            password:<input type="password" id="password" size="20">
+            <input type="submit" id="login">
+            </form>
+            <div id="div_result"></div>
+    </body>
+    <script>
+    $(document).ready(function(){
+        $("#loginForm").submit(function(event){
+            event.preventDefault();
+            var user = $("#username").val();
+            var pw = $("#password").val();
+            if(user == ("") || pw == ("")){
+                $("#div_result").html("please input username or password");
+                return;
+            }else{
+                console.log(user + " " + pw);
+                $("#div_result").html("loading");
+                $.post("login",{
+                    username:user,
+                    password:pw
+                }).done(function( data ) {
+                    $("#div_result").html(data);
+                });
+            }
+        });
+    });
+    </script>
+</html>

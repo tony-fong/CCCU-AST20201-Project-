@@ -1,0 +1,1 @@
+Insert Into attendance (`class_id`, `student_id`, `date`, `state`) 
